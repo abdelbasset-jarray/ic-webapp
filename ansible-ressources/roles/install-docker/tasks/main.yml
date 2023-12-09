@@ -4,11 +4,6 @@
     name: "*"
     state: latest
 
-- name: Remove all previous versions of yum-utils
-   dnf:
-    name: dnf-utils
-    state: absent
-
 - name: Install pip for Python 3
   raw: test -e /usr/bin/python3 || (yum -y install python3 && alternatives --set python /usr/bin/python3)
   args:
@@ -29,7 +24,6 @@
     state: present
     lock_timeout: 180
   loop:
-    - dnf-utils
     - device-mapper-persistent-data
     - lvm2
     - python3
