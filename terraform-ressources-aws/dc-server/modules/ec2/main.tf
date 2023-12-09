@@ -1,5 +1,5 @@
 resource "aws_instance" "DC_Server_Dev-ec2" {
-  ami               = "ami-033b95fb8079dc481"
+  ami               = "ami-0fc5d935ebf8bc3b"
   instance_type     = var.instance_type
   key_name          = var.ssh_key
   availability_zone = var.AZ
