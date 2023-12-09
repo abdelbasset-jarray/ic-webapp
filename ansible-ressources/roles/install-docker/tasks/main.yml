@@ -9,9 +9,7 @@
         become_method: sudo
         become_flags: "-S"
         vars_files:
-          - ic-webapp/vault.yml
-          #ansible_become_pass: "private_aws_key"          
-        
+          - ic-webapp/vault.yml    
       - name: Update APT package cache
         apt:
           update_cache: yes
