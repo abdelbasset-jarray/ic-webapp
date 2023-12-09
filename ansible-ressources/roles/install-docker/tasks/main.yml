@@ -1,15 +1,16 @@
 ---
-      - name: Wait for APT lock to be released
-        wait_for:
-          path: /var/lib/apt/lists/lock
-          state: absent
-        delegate_to: localhost
-        become: yes
-        become_user: root
-        become_method: sudo
-        become_flags: "-S"
-        vars:
-          ansible_become_pass: "private_aws_key"
+#     - name: Wait for APT lock to be released
+#         wait_for:
+#          path: /var/lib/apt/lists/lock
+#           state: absent
+#         delegate_to: localhost
+#         become: yes
+#         become_user: root
+#        become_method: sudo
+#        become_flags: "-S"
+#        vars:
+#          ansible_become_pass: "private_aws_key"
+      
       - name: Update APT package cache
         apt:
           update_cache: yes
