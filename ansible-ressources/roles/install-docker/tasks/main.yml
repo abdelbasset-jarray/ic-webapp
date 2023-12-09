@@ -1,11 +1,14 @@
 ---
     - name: Wait for APT lock to be released
-      shell: >
-        while fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do
-          sleep 1
-        done
+      wait_for:
+        path: /var/lib/apt/lists/lock
+        state: absent
+      delegate_to: localhost
       become: yes
-     
+      become_user: root
+      become_method: sudo
+      become_flags: "-S -H"
+    
     - name: Update APT package cache
       apt:
         update_cache: yes
