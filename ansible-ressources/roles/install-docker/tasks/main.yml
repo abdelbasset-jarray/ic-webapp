@@ -1,11 +1,4 @@
 ---
-  - name: Install Docker on Ubuntu
-    hosts: your_aws_instance
-    become: yes
-    vars:
-      region: "us-east-1"  # région AWS
-  
-    tasks:
       - name: Update APT package cache
         apt:
           update_cache: yes
@@ -46,8 +39,8 @@
           groups: docker
           append: yes
 
-    - name: Start and enable Docker service
-      service:
-        name: docker
-        state: started
-        enabled: yes
+      - name: Start and enable Docker service
+        service:
+          name: docker
+          state: started
+          enabled: yes
