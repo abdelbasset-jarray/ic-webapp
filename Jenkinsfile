@@ -11,13 +11,7 @@ pipeline {
     }
     agent none
     stages {
-        stage("Cleanup Workspace"){
-            steps {
-                cleanWs()
-            }
-
-        }
-    
+           
        stage('Build image') {
            agent any
            steps {
