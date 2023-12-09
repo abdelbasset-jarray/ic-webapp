@@ -1,0 +1,61 @@
+
+// Pipeline infrastructure Cluster K8S Production
+
+pipeline {
+    agent any
+    stages { 
+        stage('Checkout from Git'){
+            steps{
+                git branch: 'main', url: 'https://github.com/abdelbasset-jarray/icdc-infrastructure-ressources.git'
+            }
+        }
+        stage('Terraform version'){
+             steps{
+                 sh 'terraform --version'
+             }
+        }
+    
+        stage ('Provision EKS- Terraform init') {
+            steps {  
+                echo 'initialisation de Terraform' 
+                script {
+                    dir ('terraform-ressources-aws/dc-cluster-eks-aws-service/dev') {
+                        sh "terraform init"
+                    }
+                }
+            }  
+        }
+        stage ('Provision eks- Terraform plan') {
+            steps {  
+                echo 'terraform plan' 
+                script {
+                    dir ('terraform-ressources-aws/dc-cluster-eks-aws-service/dev') {
+                        sh "terraform plan"
+                    }
+                }
+            }  
+        }
+        stage ('Provision eks- Terraform apply') {
+            steps {  
+                when { branch 'master'}
+                echo 'appliquer le code Terraform' 
+                script {
+                    dir ('terraform-ressources-aws/dc-cluster-eks-aws-service/dev') {
+                        sh "terraform apply -auto-approve || exit 1"
+                    }
+                }
+            }  
+        }
+        stage ('Update kube-config') {
+            steps {  
+                echo 'mise à jour vers eks kubeconfig' 
+                script {
+                    dir ('terraform-ressources-aws/dc-cluster-eks-aws-service/dev') {
+                        sh "aws eks update-kubeconfig --name DC_Server-Cluster-K8S-Dev"
+                    }
+                }
+            }  
+        }
+    }
+}
+

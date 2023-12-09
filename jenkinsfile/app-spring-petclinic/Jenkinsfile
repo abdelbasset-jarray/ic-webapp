@@ -1,0 +1,84 @@
+ipeline {
+    agent any
+    environment {
+                APP_NAME = "app-spring-petclinic"
+                RELEASE = "1.0.0"
+                SONAR_TOKEN = credentials('jenkins-sonarqube_token')
+                DOCKER_USER = "jarray81"
+                DOCKER_PASS = 'dockerhub'
+                IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+                IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+            }
+
+    stages {
+
+        stage ('SonarQube scan') {
+            steps {  
+                echo 'scanning code' 
+                script {
+                    dir ('application-code-g') {
+                    env.SONAR_TOKEN = "${SONAR_TOKEN}"
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=august_project_job_ci'
+                    }
+                }
+            }  
+        }
+        stage ('Build jar') {
+            steps {  
+                echo 'Building jar' 
+                script {
+                    dir ('application-code-g') {
+                        sh 'mvn clean install -DskipTests,spring.profiles.active=mysql'
+                    }
+                }
+            }  
+        }
+        stage ('Build docker image') {
+            steps {  
+                echo 'Building docker image' 
+                script {
+                    dir ('application-code-g') {
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+                }
+            }  
+        }
+        stage ('Push docker image') {
+            steps {  
+                echo 'pushing docker image' 
+                script {
+                    dir ('application-code-g') {
+                        docker_image.push("${BUILD_NUMBER}")
+                    }
+                }
+            }  
+        }
+        stage ('Push to dockerhub') {
+            steps {
+                script {
+                    echo 'Pushing to dockerhub'
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                            sh "echo $PASS | docker login -u $USER --password-stdin"
+                            docker_image.push("${BUILD_NUMBER}")
+                      }
+                }
+            }  
+        }
+        
+        stage ('Clean docker images') {
+            steps {  
+                echo 'Cleaning the docker images' 
+                script {
+                        dir ('application-code-g') {
+                        sh "docker rmi ${IMAGE_NAME}:${BUILD_NUMBER}"
+                        sh "docker rmi ${IMAGE_NAME}:latest"
+                    }
+                }
+            } 
+        }
+
+        
+   
+    } 
+}
+
