@@ -16,7 +16,7 @@ pipeline {
            agent any
            steps {
               script {
-                sh 'docker build --no-cache -f ./app/ic-webapp/${DOCKERFILE_NAME} -t ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG ./app/ic-webapp'
+                sh 'docker build --no-cache -f ./app/${DOCKERFILE_NAME} -t ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG ./app'
                 //sh 'docker build --no-cache -f ./odoo-webapp/${DOCKERFILE_NAME} -t ${DOCKERHUB_ID}/$IMAGE_NAME:$IMAGE_TAG ./odoo-webapp'
               }
            }
