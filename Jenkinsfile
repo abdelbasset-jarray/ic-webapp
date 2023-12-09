@@ -206,7 +206,7 @@ pipeline {
                     }
                 }
 
-                stage ("DEV - Deploy ic-webapp") {
+               /* stage ("DEV - Deploy ic-webapp") {
                     steps {
                         script {
                             sh '''
@@ -215,7 +215,7 @@ pipeline {
                             '''
                         }
                     }
-                }  
+                }  */
 
             }
         }
