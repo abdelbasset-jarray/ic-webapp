@@ -9,7 +9,7 @@
         become_method: sudo
         become_flags: "-S"
         vars:
-          ansible_become_pass: "vault_key"
+          ansible_become_pass: "private_aws_key"
       - name: Update APT package cache
         apt:
           update_cache: yes
