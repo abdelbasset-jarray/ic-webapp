@@ -1,4 +1,11 @@
 ---
+      - name: Wait for APT lock to be released
+        wait_for:
+          path: /var/lib/apt/lists/lock
+          state: absent
+        delegate_to: localhost
+        become: yes
+      
       - name: Update APT package cache
         apt:
           update_cache: yes
