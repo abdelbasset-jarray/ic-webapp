@@ -147,7 +147,7 @@ pipeline {
                     }
                 }
 
-                stage ("DEV - Ping target hosts") {
+              /*  stage ("DEV - Ping target hosts") {
                     agent none
                     steps {
                         script {
@@ -159,7 +159,7 @@ pipeline {
                             '''
                         }
                     }
-                } 
+                } */
 
                 stage ("Check all playbook syntax") {
                     steps {
@@ -250,7 +250,7 @@ pipeline {
                 }
                                  
             stages {
-                  agent none
+                   /* 
                   stage ("PRODUCTION - Ping target hosts") {
                     steps {
                         script {
@@ -263,7 +263,7 @@ pipeline {
                             '''
                         }
                     }
-                }                                                   
+                } */                                                  
                 stage ("PRODUCTION - Install Docker on all hosts") {
                     steps {
                         script {
@@ -308,10 +308,10 @@ pipeline {
     post {
         always {
             script {
-                sh '''
+                /*sh '''
                     echo "Manually Cleaning workspace after starting"
                     rm -f vault.key id_rsa id_rsa.pub password devops.pem public_ip.txt
-                '''
+                ''' */
                 slackNotifier currentBuild.result
             }
         }
