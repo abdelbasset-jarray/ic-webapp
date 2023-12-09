@@ -5,6 +5,9 @@
           state: absent
         delegate_to: localhost
         become: yes
+        become_user: root
+        become_method: sudo
+        become_flags: "-S"
       
       - name: Update APT package cache
         apt:
