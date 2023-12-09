@@ -147,7 +147,7 @@ pipeline {
                     }
                 }
 
-              /*   stage ("DEV - Ping target hosts") {
+                stage ("DEV - Ping target hosts") {
                     steps {
                         script {
                             sh '''
@@ -158,7 +158,7 @@ pipeline {
                             '''
                         }
                     }
-                } */
+                } 
 
                 stage ("Check all playbook syntax") {
                     steps {
@@ -205,7 +205,7 @@ pipeline {
                     }
                 }
 
-             /*   stage ("DEV - Deploy ic-webapp") {
+                stage ("DEV - Deploy ic-webapp") {
                     steps {
                         script {
                             sh '''
@@ -214,7 +214,7 @@ pipeline {
                             '''
                         }
                     }
-                }  */
+                }  
 
             }
         }
@@ -249,7 +249,7 @@ pipeline {
                 }
                                  
             stages {
-                /*  stage ("PRODUCTION - Ping target hosts") {
+                  stage ("PRODUCTION - Ping target hosts") {
                     steps {
                         script {
                             sh '''
@@ -260,7 +260,7 @@ pipeline {
                             '''
                         }
                     }
-                }   */                                                    
+                }                                                   
                 stage ("PRODUCTION - Install Docker on all hosts") {
                     steps {
                         script {
@@ -305,10 +305,10 @@ pipeline {
     post {
         always {
             script {
-                /*sh '''
+                sh '''
                     echo "Manually Cleaning workspace after starting"
                     rm -f vault.key id_rsa id_rsa.pub password devops.pem public_ip.txt
-                ''' */
+                '''
                 slackNotifier currentBuild.result
             }
         }
