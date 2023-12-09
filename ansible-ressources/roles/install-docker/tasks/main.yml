@@ -1,11 +1,11 @@
 ---
 - name: Update System
-  yum:
+  dnf:
     name: "*"
     state: latest
 
 - name: Remove all previous versions of yum-utils
-  yum:
+   dnf:
     name: yum-utils
     state: absent
 
@@ -16,7 +16,7 @@
   become: yes
 
 - name: Install Docker Python library
-  yum:
+  dnf:
     name: docker
     state: present
 
@@ -24,12 +24,12 @@
   setup:
 
 - name: Install prerequisite packages
-  yum:
+  dnf:
     name: "{{ item }}"
     state: present
     lock_timeout: 180
   loop:
-    - yum-utils
+    - dnf-utils
     - device-mapper-persistent-data
     - lvm2
     - python3
