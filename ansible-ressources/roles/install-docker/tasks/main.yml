@@ -6,7 +6,7 @@
 
 - name: Remove all previous versions of yum-utils
    dnf:
-    name: yum-utils
+    name: dnf-utils
     state: absent
 
 - name: Install pip for Python 3
