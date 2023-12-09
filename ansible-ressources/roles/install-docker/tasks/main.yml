@@ -3,7 +3,10 @@
   yum:
     name: "*"
     state: latest
-
+- name: supprimer toutes les versions précédentes 
+   yum:
+     name: yum-utils
+     state: absent
 - name: Install pip for Python 3
   raw: test -e /usr/bin/python3 || (yum -y install python3 && alternatives --set python /usr/bin/python3)
   args:
@@ -22,6 +25,7 @@
   yum:
     name: "{{ item }}"
     state: present
+    lock_timeout: 180
   loop:
     - yum-utils
     - device-mapper-persistent-data
