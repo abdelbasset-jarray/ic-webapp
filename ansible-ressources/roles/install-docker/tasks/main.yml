@@ -8,7 +8,8 @@
         become_user: root
         become_method: sudo
         become_flags: "-S"
-      
+        vars:
+          ansible_become_pass: "ansible_sudo_password"
       - name: Update APT package cache
         apt:
           update_cache: yes
