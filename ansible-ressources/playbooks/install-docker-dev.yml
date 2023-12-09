@@ -1,6 +1,0 @@
----
-- hosts: dev
-  become: true
-  gather_facts: yes
-  roles:
-    - { role: install-docker-dev}
