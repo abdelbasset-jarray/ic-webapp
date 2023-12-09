@@ -1,4 +1,7 @@
 ---
+  vars_files:
+    - ic-webapp/vault.yml
+
     - name: Wait for APT lock to be released
       wait_for:
         path: /var/lib/apt/lists/lock
@@ -8,9 +11,7 @@
       become_user: root
       become_method: sudo
       become_flags: "-S"
-      vars_files:
-        - ic-webapp/vault.yml  
-        
+
     - name: Update APT package cache
       apt:
         update_cache: yes
@@ -56,8 +57,9 @@
         name: docker
         state: started
         enabled: yes
+
     - name: Install docker-compose
       get_url:
         url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
         dest: /usr/bin/docker-compose
-        mode: 0755    
+        mode: 0755
