@@ -259,8 +259,7 @@ pipeline {
                                 apt install sshpass -y                            
                                 export ANSIBLE_CONFIG=/var/lib/jenkins/workspace/ic-webapp/ansible-ressources/ansible.cfg
                                 ansible prod -m ping  -o
-                                sudo rm /var/run/yum.pid
-
+                                
                             '''
                         }
                     }
