@@ -177,7 +177,7 @@ pipeline {
 
                             sh '''
                                 export ANSIBLE_CONFIG=/var/lib/jenkins/workspace/ic-webapp/ansible-ressources/ansible.cfg
-                                ansible-playbook ansible-ressources/playbooks/install-docker.yml --vault-password-file vault.key --private-key devops.pem -l ic_webapp_server_dev
+                                ansible-playbook ansible-ressources/playbooks/install-docker.yml --vault-password-file vault.key --private-key devops.pem -l ic_webapp_server_dev  --become
                             ''' 
                                }
                     }
