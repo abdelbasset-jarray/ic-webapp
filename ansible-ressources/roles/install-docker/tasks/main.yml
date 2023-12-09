@@ -5,9 +5,7 @@
           sleep 1
         done
       become: yes
-      become_method: sudo
-      become_flags: "-S"
-
+     
     - name: Update APT package cache
       apt:
         update_cache: yes
