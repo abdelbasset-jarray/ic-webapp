@@ -1,5 +1,6 @@
 /* import shared library. */
 @Library('ajarray-shared-library')_
+
 pipeline {
     environment {
         IMAGE_NAME = "ic-webapp"
