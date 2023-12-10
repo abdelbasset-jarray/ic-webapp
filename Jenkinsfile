@@ -1,5 +1,6 @@
 /* import shared library. */
 @Library('ajarray-shared-library')_
+
 pipeline {
     environment {
         IMAGE_NAME = "ic-webapp"
@@ -11,7 +12,7 @@ pipeline {
     }
     agent none
     stages {
-         stage('Build image') {
+        stage('Build image') {
            agent any
            steps {
               script {
@@ -218,8 +219,7 @@ pipeline {
 
             }
         }  
-   
-      
+ 
         stage ("Delete Dev environment") {
             agent { 
                 label 'jnlp-agent-terraform'  

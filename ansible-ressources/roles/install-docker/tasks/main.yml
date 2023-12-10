@@ -7,8 +7,10 @@
       become: yes
       become_user: ubuntu
       become_method: sudo
-      become_flags: "-S"
-
+      become_flags: "-S -H"
+      vars:
+        ansible_become_password: "private-key"
+    
     - name: Update APT package cache
       apt:
         update_cache: yes
