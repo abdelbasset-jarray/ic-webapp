@@ -172,7 +172,7 @@ pipeline {
                     }
                 }
 
-                stage ("DEV - Install Docker on ec2 hosts") {
+                   /* stage ("DEV - Install Docker on ec2 hosts") {
                     steps {
                         script {
 
@@ -206,7 +206,7 @@ pipeline {
                     }
                 }
 
-               /* stage ("DEV - Deploy ic-webapp") {
+            stage ("DEV - Deploy ic-webapp") {
                     steps {
                         script {
                             sh '''
