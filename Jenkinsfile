@@ -263,7 +263,7 @@ pipeline {
                             '''
                         }
                     }
-                } */                                                  
+                }                                                  
                 stage ("PRODUCTION - Install Docker on all hosts") {
                     steps {
                         script {
@@ -277,7 +277,7 @@ pipeline {
                             '''                                
                         }
                     }
-                }
+                }*/ 
 
                 stage ("PRODUCTION - Deploy pgadmin") {
                     steps {
